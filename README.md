@@ -61,9 +61,9 @@
 
 - 如何手动实现一个 Promise ?
 
-  <details>
-  <summary>点击</summary>
-  promise 的三种状态 pending, resolve, reject
+    <details>
+    <summary>点击</summary>
+    promise 的三种状态 pending, resolve, reject
 
   ```js
   function MyPromise(callback) {
@@ -135,7 +135,7 @@
   };
   ```
 
-      </details>
+  </details>
 
 * AST（抽象语法树）？
 
