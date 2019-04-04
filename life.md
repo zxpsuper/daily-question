@@ -72,3 +72,5 @@
 - **该怎么购买基金 ?**
 
   [「 知乎问答 」 ：基金定投一定赚钱吗？—— “李大人” 的回复](https://www.zhihu.com/question/35163926/answer/626026667)
+
+![](https://raw.githubusercontent.com/zxpsuper/daily-question/master/image/fork_and_star.jpg)
