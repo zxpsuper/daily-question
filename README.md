@@ -17,7 +17,7 @@
 
   </details>
 
-* **双精度浮点数是如何保存的 ?**
+* 双精度浮点数是如何保存的 ?
 
   <details>
       <summary>点击</summary>
@@ -128,7 +128,7 @@
 
 ### **2019/03/27 - 2019/03/31**
 
-- **请问这句语句 `var args=[].slice.call(arguments,1)` 是什么意思？**
+- 请问这句语句 `var args=[].slice.call(arguments,1)` 是什么意思？
 
   <details>
   <summary>点击</summary>
@@ -154,7 +154,7 @@
   4. 综上，这句语句的作用是——**将函数中的实参值转化成数组**
      </details>
 
-- **连等赋值问题**
+- 连等赋值问题
 
   ```js
   var a = { n: 1 };
@@ -181,7 +181,7 @@
 
     </details>
 
-- **如何手动实现一个 Promise ?**
+- 如何手动实现一个 Promise ?
 
     <details>
     <summary>点击</summary>
@@ -259,7 +259,7 @@
 
   </details>
 
-- **AST（抽象语法树）？**
+- AST（抽象语法树）？
 
   <details>
     <summary>点击</summary>
@@ -318,7 +318,7 @@
   - 优化变更代码，改变代码结构使达到想要的结构
     </details>
 
-* **为什么 `0.1 + 0.2 !== 0.3` ?**
+* 为什么 `0.1 + 0.2 !== 0.3` ?
 
     <details>
       <summary>点击</summary>
