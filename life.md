@@ -4,6 +4,12 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/04/01 - 2019/04/07**
+
+- 桀骜不驯的孙悟空为何甘愿成佛 ？
+
+  [「 知乎问答 」 ：孙悟空为什么不找如来报仇？—— “异常体研究中心” 的回答](https://www.zhihu.com/question/43344428/answer/541721659) （细思极恐，猴子已非当年猴子）
+
 ### **2019/03/27 - 2019/03/31**
 
 - **“马桶”的由来是什么？**
@@ -71,6 +77,6 @@
 
 - **该怎么购买基金 ?**
 
-  [「 知乎问答 」 ：基金定投一定赚钱吗？—— “李大人” 的回复](https://www.zhihu.com/question/35163926/answer/626026667)
+  [「 知乎问答 」 ：基金定投一定赚钱吗？—— “李大人” 的回答](https://www.zhihu.com/question/35163926/answer/626026667)
 
 ![](https://raw.githubusercontent.com/zxpsuper/daily-question/master/image/fork_and_star.jpg)

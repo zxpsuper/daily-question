@@ -6,7 +6,18 @@
 
 ### **2019/04/01 - 2019/04/07**
 
-- 双精度浮点数是如何保存的 ?
+- `__proto__`和 `prototype` 的区别 ？
+
+  <details>
+  <summary>点击</summary>
+
+  1. 在 JS 里，万物皆对象。方法（Function）是对象，方法的原型(Function.prototype)是对象。因此，它们都会具有对象共有的特点。即：**对象具有属性`__proto__`，可称为隐式原型，一个对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。**
+
+  2. 方法(Function)方法这个特殊的对象，除了和其他对象一样有上述 proto 属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做 constructor，这个属性包含了一个指针，指回原构造函数。
+
+  </details>
+
+* 双精度浮点数是如何保存的 ?
 
   <details>
       <summary>点击</summary>
@@ -49,6 +60,68 @@
 
   ```js
     0 01111111011 1001100110011001100110011001100110011001100110011001
+  ```
+
+  </details>
+
+- 如何找出字符串中出现最多的字母 （ababccdeajxac）?
+
+  <details>
+  <summary>点击</summary>
+
+  最先想到的解法是用 map 纪录每个字符的次数，然后找出最多的即可：
+
+  ```js
+  function getMaxNumberOfChar(str) {
+    return (str + "").split("").reduce(
+      function(pre, cur, index, arr) {
+        cur in pre ? pre[cur]++ : (pre[cur] = 1);
+        pre[cur] > pre.value && ((pre.char = cur), (pre.value = pre[cur]));
+        return pre;
+      },
+      { value: 0 }
+    );
+  }
+  getMaxNumberOfChar("ababccdeajxac"); // Object {value: 4, a: 4, char: "a", b: 2, c: 3…}
+  ```
+
+  此外，可以考虑用正则来辅助处理：
+
+  ```js
+  function getMaxNumberOfChar(str) {
+    return (str + "")
+      .split("")
+      .sort()
+      .join("")
+      .match(/(\w)\1*/g)
+      .reduce(
+        function(pre, cur) {
+          return cur.length > pre.value
+            ? { value: cur.length, char: cur[0] }
+            : pre;
+        },
+        { value: 0 }
+      );
+  }
+  getMaxNumberOfChar("ababccdeajxac"); // Object {value: 4, char: "a"}
+  ```
+
+  这里拓展一下 reduce 函数的用法
+
+  ```js
+  // reduce 函数
+  // array.reduce(function(accumulator, currentValue, currentIndex, arr), initialValue)
+  // reducer回调函数本身接受几个参数，第一个参数是 accumulator 累加器，第二个是数组中的 item，第三个参数是该项的索引，最后一个参数是原始数组的引用。
+  // initialValue 为reduce初始值，否则视数组第一个值为初始值，选填
+  const array1 = [1, 2, 3, 4];
+
+  // 1 + 2 + 3 + 4
+  console.log(
+    array1.reduce((accumulator, currentValue) => {
+      console.log(accumulator, currentValue);
+      return accumulator + currentValue;
+    })
+  );
   ```
 
   </details>
