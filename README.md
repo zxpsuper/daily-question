@@ -4,9 +4,254 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/04/08 - 2019/04/14**
+
+- 函数的防抖与节流 ？
+
+  <details>
+  <summary>点击</summary>
+
+  **防抖**
+
+  所谓防抖，就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。（防误触）
+
+  ```js
+  // 延缓执行
+  function debounce(func, wait) {
+    var timeout;
+
+    return function() {
+      var context = this;
+      var args = arguments;
+      console.log(args);
+      console.log(func);
+      if (timeout) clearTimeout(timeout);
+
+      timeout = setTimeout(function() {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+  // 立即执行
+  function debounce(func, wait) {
+    var timeout;
+
+    return function() {
+      var context = this;
+      var args = arguments;
+
+      if (timeout) clearTimeout(timeout);
+
+      var callNow = !timeout;
+      timeout = setTimeout(function() {
+        timeout = null;
+      }, wait);
+
+      if (callNow) func.apply(context, args);
+    };
+  }
+  ```
+
+  **节流**
+
+  所谓节流，就是指连续触发事件但是在 n 秒中只执行一次函数。（限制流量）
+
+  ```js
+  // 时间戳
+  function throttle(func, wait) {
+    var previous = 0;
+
+    return function() {
+      var now = Date.now();
+      var context = this;
+      var args = arguments;
+      if (now - previous > wait) {
+        func.apply(context, args);
+        previous = now;
+      }
+    };
+  }
+  // 定时器
+  function throttle(func, wait) {
+    var timeout;
+
+    return function() {
+      var context = this;
+      var args = arguments;
+      if (!timeout) {
+        timeout = setTimeout(function() {
+          timeout = null;
+          func.apply(context, args);
+        }, wait);
+      }
+    };
+  }
+  ```
+
+  </details>
+
 ### **2019/04/01 - 2019/04/07**
 
-- `__proto__`和 `prototype` 的区别 ？
+- 为何 `[] == ![]` 结果为 `true`，而 `{} == !{}` 却为 `false`
+
+  <details>
+  <summary>点击</summary>
+
+  **首先了解一下类型转化的规则：**
+
+  1、如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值——false 转换为 0，而 true 转换为 1；
+
+  2、如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值
+
+  3、如果一个操作数是对象，另一个操作数不是，则调用对象的 valueOf()（boolean 对象方法）方法或者 toString()方法，用得到的基本类型值按照前面的规则进行比较
+
+  null 和 undefined 是相等的
+
+  4、要比较相等性之前，不能将 null  和  undefined  转换成其他任何值
+
+  5、如果有一个操作数是 NaN，则相等操作符返回 false ，而不相等操作符返回  true。重要提示：即使两个操作数都是 NaN，相等操作符也返回 false 了；因为按照规则， NaN 不等于 NaN （NaN 不等于任何值，包括他本身）
+
+  6、如果两个操作数都是对象，则比较它们是不是同一个对象，如果两个操作数都指向同一个对象，则相等操作符返回 true；否则，返回 false
+
+  7、 `!`可将变量转换成 boolean 类型，null、undefined、NaN 以及空字符串('')取反都为 true，其余都为 false。
+
+  **现在开始分析题目**
+
+  ```js
+  [] == ![];
+  // 先转化右边 ![],
+  // `!`可将变量转换成 boolean 类型，null、undefined、NaN 以及空字符串('')取反都为 true，其余都为 false。
+  // 所以 ![] => false => 0
+
+  // 左边 [], 因为[].toString() 为空字符串,所以 [] => ''
+
+  // 综上， '' == 0, 为 true
+  ```
+
+  ```js
+  {} == !{}
+  // 先转化右边 !{},
+  // `!`可将变量转换成 boolean 类型，null、undefined、NaN 以及空字符串('')取反都为 true，其余都为 false。
+  // 所以 !{} => false => 0
+
+  // 左边 ({}).toString() => "[object Object]"
+
+  // 综上， "[object Object]" == 0, 为 false
+  ```
+
+  </details>
+
+- RESTful 接口的优缺点
+
+  <details>
+  <summary>点击</summary>
+
+  **什么是 restful 接口 ？**
+
+  REST -- REpresentational State Transfer，英语的直译就是“表现层状态转移”，它包含以下三个方面：
+
+  URL 设计: RESTful 的核心思想就是，客户端发出的数据操作指令都是"动词 + 宾语"的结构。比如，GET /articles 这个命令，GET 是动词，/articles 是宾语。
+
+  动词通常就是五种 HTTP 方法，对应 CRUD 操作。
+
+  - GET：读取（Read）
+  - POST：新建（Create）
+  - PUT：更新（Update）
+  - PATCH：更新（Update），通常是部分更新
+  - DELETE：删除（Delete）
+
+  状态码: 客户端的每一次请求，服务器都必须给出回应。回应包括 HTTP 状态码和数据两部分。
+
+  服务器回应: API 返回的数据格式，不应该是纯文本，而应该是一个 JSON 对象，因为这样才能返回标准的结构化数据。所以，服务器回应的 HTTP 头的 `Content-Type` 属性要设为 `application/json。`
+
+  **优点**
+
+  简洁明了，一目了然；轻量，直接通过 http，不需要额外的协议，post/get/put/delete 操作
+
+  **缺点**
+
+  当一次更新的内容多的时候需要调用更多的接口。删除也是，如果我想批量删除呢？
+
+  1. 对后端开发人员要求高，业务逻辑有时难以被抽象为资源的增删改查。
+
+  2. 对前端开发人员不友好，API 粒度较粗，难以查询符合特殊要求的数据，同样的业务要比普通的 API 需要更多次 HTTP 请求。
+
+     </details>
+
+* 对视口 viewport 的理解 ?
+
+  <details>
+  <summary>点击</summary>
+
+  **视口分为：layout viewport -- 布局视口，visual viewport -- 视觉视口，ideal viewport -- 理想视口**
+
+  如果把移动设备上浏览器的可视区域设为 viewport 的话，某些网站就会因为 viewport 太窄而显示错乱，所以这些浏览器就决定默认情况下把 viewport 设为一个较宽的值，比如 980px，这样的话即使是那些为桌面设计的网站也能在移动浏览器上正常显示了。这个浏览器默认的 viewport 叫做 layout viewport。这个 layout viewport 的宽度可以通过 document.documentElement.clientWidth 来获取。
+
+  layout viewport 的宽度是大于浏览器可视区域的宽度的，所以我们还需要一个 visual viewport 来代表浏览器可视区域的大小。visual viewport 的宽度可以通过 window.innerWidth 来获取
+
+  ideal viewport 即每个设备完美适配的视口。所谓的完美适配指的是，第一不需要用户缩放和横向滚动条就能正常的查看网站的所有内容；第二是无论文字，图片等在不同的设备都能显示出差不多的效果。ideal viewport 并没有一个固定的尺寸，不同的设备拥有有不同的 ideal viewport。
+
+  **mata 标签与 viewport 的关系**
+
+  ```html
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+  />
+  ```
+
+  移动设备默认的是 layout viewport , 但是我们需要的是 ideal viewport, 那么通过 meta 标签的作用就是：让当前 viewport 的宽度等于设备的宽度，同时不允许用户手动缩放。
+
+  **meta 标签中 content 的属性和值如下：**
+
+  - width 设置 layout viewport 的宽度，为一个正整数，或字符串"width-device"
+
+  - initial-scale 设置页面的初始缩放值，为一个数字，可以带小数
+
+  - minimum-scale 允许用户的最小缩放值，为一个数字，可以带小数
+
+  - maximum-scale 允许用户的最大缩放值，为一个数字，可以带小数
+
+  - height 设置 layout viewport 的高度，这个属性对我们并不重要，很少使用
+
+  - user-scalable 是否允许用户进行缩放，值为"no"或"yes", no 代表不允许，yes 代表允许
+
+  </details>
+
+* 移动端的像素?
+
+  <details>
+  <summary>点击</summary>
+
+  1、物理像素（设备像素）
+
+  红蓝绿可以调配出任何颜色，通常说的手机像素就是由许多红蓝绿组成的一个小块，1 个小块表示 1 个像素。一个物理像素是显示器(手机屏幕)上最小的物理显示单元，通过控制每个像素点的颜色，使屏幕显示出不同的图像。屏幕从工厂出来那天起，它上面的物理像素点就固定不变了，单位 pt - 固定单位。
+
+  比如：iPhone6、7、8 的分辨率为 1334\*750 像素表示,横向 750 个像素,纵向 1334 个像素
+
+  2、CSS 像素
+
+  CSS 和 JS 使用的抽象单位，浏览器内的一切长度都是以 CSS 像素为单位的，CSS 像素的单位是 px。
+
+  一倍屏：当设备像素比为 1:1 时，使用 1（1×1）个设备像素显示 1 个 CSS 像素；
+
+  二倍屏：当设备像素比为 2:1 时，使用 4（2×2）个设备像素显示 1 个 CSS 像素；
+
+  三倍屏：当设备像素比为 3:1 时，使用 9（3×3）个设备像素显示 1 个 CSS 像素。
+
+  3、像素密度（PPI）
+
+  每英寸像素取值，也就是衡量单位物理面积内拥有像素值的情况。
+
+  ![](https://math.jianshu.com/math?formula=PPI%3D%5Cfrac%7B%5Csqrt%7B%E9%95%BF%E5%BA%A6%E5%83%8F%E7%B4%A0%5E2%2B%E5%AE%BD%E5%BA%A6%E5%83%8F%E7%B4%A0%5E2%7D%7D%7B%E5%B1%8F%E5%B9%95%E8%8B%B1%E5%AF%B8%E6%95%B0%7D)
+
+  ppi 越高，每英寸像素点越多，图像越清晰；我们可以类比物体的密度，密度越大，单位体积的质量就越大，ppi 越高，单位面积的像素越多。
+
+  ppi 在 120-160 之间的手机被归为低密度手机，160-240 被归为中密度，240-320 被归为高密度，320 以上被归为超高密度（例如：苹果的 Retina 屏幕）
+
+    </details>
+
+* `__proto__`和 `prototype` 的区别 ？
 
   <details>
   <summary>点击</summary>
@@ -17,7 +262,7 @@
 
   </details>
 
-* 双精度浮点数是如何保存的 ?
+- 双精度浮点数是如何保存的 ?
 
   <details>
       <summary>点击</summary>
@@ -64,7 +309,7 @@
 
   </details>
 
-- 如何找出字符串中出现最多的字母 （ababccdeajxac）?
+* 如何找出字符串中出现最多的字母 （ababccdeajxac）?
 
   <details>
   <summary>点击</summary>
