@@ -21,7 +21,7 @@
 
   基督新教的得救之法是“因信得救”；天主教的得救之法是“守诫命得救”。
 
-  ![https://pic3.zhimg.com/80/5f8e2a4f4ccb530c1db13ed6ce91a502_hd.jpg]()
+  ![](https://pic3.zhimg.com/80/5f8e2a4f4ccb530c1db13ed6ce91a502_hd.jpg)
 
   </details>
 

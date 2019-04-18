@@ -4,7 +4,126 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/04/15 - 2019/04/21**
+
+- Hash 路由和 History 路由的区别 ？
+
+  <details>
+  <summary>点击</summary>
+
+  1. hash 路由
+
+  hash 路由一个明显的标志是带有#,我们主要是通过监听 url 中的 hash 变化来进行路由跳转。(`window.addEventListener('hashchange', this.refresh, false);`)
+
+  hash 的优势就是兼容性更好,在老版 IE 中都有运行,问题在于 url 中一直存在#不够美观,而且 hash 路由更像是 Hack 而非标准,相信随着发展更加标准化的 History API 会逐步蚕食掉 hash 路由的市场。
+
+  2. history 路由
+
+  history 路由使用 History API 来实现，具体有:
+
+  ```js
+  window.history.back(); // 后退
+  window.history.forward(); // 前进
+  window.history.go(-3); // 后退三个页面
+  ```
+
+  `history.pushState`用于在浏览历史中添加历史记录, `history.replaceState`方法的参数与`pushState`方法一模一样，区别是它修改浏览历史中当前纪录,而非添加记录,同样不触发跳转。
+
+  </details>
+
+- Vue 的响应式原理中 `Object.defineProperty` 有什么缺陷？为什么在 Vue3.0 采用了 `Proxy`，抛弃了 `Object.defineProperty`？
+
+  <details>
+  <summary>点击</summary>
+
+  1. Object.defineProperty 无法监控到数组下标的变化，导致通过数组下标添加元素，不能实时响应；
+
+  2. Object.defineProperty 只能劫持对象的属性，从而需要对每个对象，每个属性进行遍历，如果，属性值是对象，还需要深度遍历。Proxy 可以劫持整个对象，并返回一个新的对象。
+
+  3. Proxy 不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性。
+
+  </details>
+
 ### **2019/04/08 - 2019/04/14**
+
+- 手写一个 function call()函数 ？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  Function.prototype.call2 = function(context, ...args) {
+    // 因为传进来的 context 有可能是 null
+    context = context || window;
+    // Function.prototype this 为当前运行的函数
+    // 让 fn 的上下文为 context
+    context.fn = this;
+
+    const result = context.fn(...args);
+
+    delete context.fn;
+
+    return result;
+  };
+  ```
+
+  <details>
+
+- 写一个“终极类型”判断函数？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  function type(obj) {
+    var toString = Object.prototype.toString;
+    var toType = {};
+    var typeArr = [
+      "Undefined",
+      "Null",
+      "Boolean",
+      "Number",
+      "String",
+      "Object",
+      "Array",
+      "Function",
+      "Date",
+      "RegExp",
+      "Error",
+      "Arguments"
+    ];
+    typeArr.map(function(item, index) {
+      toType["[object " + item + "]"] = item.toLowerCase();
+    });
+
+    return typeof obj !== "object" ? typeof obj : toType[toString.call(obj)];
+  }
+  ```
+
+  </details>
+
+* 写一个函数，判断各种类型的不同变量是否相等，即“终极等于”函数？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  const equals = (a, b) => {
+    if (a === b) return true;
+    if (a instanceof Date && b instanceof Date)
+      return a.getTime() === b.getTime();
+    if (!a || !b || (typeof a !== "object" && typeof b !== "object"))
+      return a === b;
+    if (a.prototype !== b.prototype) return false;
+    if (Array.isArray(a) && Array.isArray(b)) a.sort(), b.sort();
+
+    let keys = Object.keys(a);
+    if (keys.length !== Object.keys(b).length) return false;
+    return keys.every(k => equals(a[k], b[k]));
+  };
+  ```
+
+  </details>
 
 - mouseover 和 mouseenter 的区别 ？
 
