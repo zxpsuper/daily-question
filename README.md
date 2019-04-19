@@ -6,6 +6,28 @@
 
 ### **2019/04/15 - 2019/04/21**
 
+- 函数柯里化的理解？
+
+  <details>
+  <summary>点击</summary>
+
+  在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
+
+  那究竟柯里化有什么作用呢？常见的作用是：参数复用、延迟运行、扁平化
+
+  </details>
+
+* Vue 组件中的 name 属性的作用 ？
+
+  <details>
+  <summary>点击</summary>
+
+  组件在全局用 Vue.component() 注册时，全局 ID 自动作为组件的 name。
+
+  指定 name 选项的另一个好处是便于调试。有名字的组件有更友好的警告信息。另外，当在有 vue-devtools，未命名组件将显示成 <AnonymousComponent>，这很没有语义。通过提供 name 选项，可以获得更有语义信息的组件树。
+
+  </details>
+
 - Hash 路由和 History 路由的区别 ？
 
   <details>
