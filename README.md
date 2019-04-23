@@ -4,6 +4,19 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/04/22 - 2019/04/28**
+
+- 函数柯里化的理解？
+
+  <details>
+  <summary>点击</summary>
+
+  在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
+
+  那究竟柯里化有什么作用呢？常见的作用是：参数复用、延迟运行、扁平化
+
+  </details>
+
 ### **2019/04/15 - 2019/04/21**
 
 - 写一个乱序函数 ？
@@ -17,6 +30,7 @@
   function shuffle(a) {
     for (let i = a.length; i; i--) {
       let j = Math.floor(Math.random() * i);
+      // es6语法
       [a[i - 1], a[j]] = [a[j], a[i - 1]];
     }
     return a;
@@ -72,16 +86,28 @@
 
   </details>
 
-- 函数柯里化的理解？
+- 手写一个 function call()函数 ？
 
   <details>
   <summary>点击</summary>
 
-  在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
+  ```js
+  Function.prototype.call2 = function(context, ...args) {
+    // 因为传进来的 context 有可能是 null
+    context = context || window;
+    // Function.prototype this 为当前运行的函数
+    // 让 fn 的上下文为 context
+    context.fn = this;
 
-  那究竟柯里化有什么作用呢？常见的作用是：参数复用、延迟运行、扁平化
+    const result = context.fn(...args);
 
-  </details>
+    delete context.fn;
+
+    return result;
+  };
+  ```
+
+  <details>
 
 * Vue 组件中的 name 属性的作用 ？
 
@@ -133,29 +159,6 @@
   </details>
 
 ### **2019/04/08 - 2019/04/14**
-
-- 手写一个 function call()函数 ？
-
-  <details>
-  <summary>点击</summary>
-
-  ```js
-  Function.prototype.call2 = function(context, ...args) {
-    // 因为传进来的 context 有可能是 null
-    context = context || window;
-    // Function.prototype this 为当前运行的函数
-    // 让 fn 的上下文为 context
-    context.fn = this;
-
-    const result = context.fn(...args);
-
-    delete context.fn;
-
-    return result;
-  };
-  ```
-
-  <details>
 
 - 写一个“终极类型”判断函数？
 
