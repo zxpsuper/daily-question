@@ -6,6 +6,72 @@
 
 ### **2019/04/15 - 2019/04/21**
 
+- 写一个乱序函数 ？
+
+  <details>
+  <summary>点击</summary>
+
+  遍历数组元素，然后将当前元素与以后随机位置的元素进行交换。
+
+  ```js
+  function shuffle(a) {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+    return a;
+  }
+  ```
+
+  </details>
+
+- 什么是惰性函数？
+
+  <details>
+  <summary>点击</summary>
+
+  惰性函数就是返回一个重写函数。example:
+
+  ```js
+  var foo = function() {
+    var t = new Date();
+    foo = function() {
+      return t;
+    };
+    return foo();
+  };
+
+  foo();
+  ```
+
+  </details>
+
+- 静态作用域与动态作用域 ？
+
+  <details>
+  <summary>点击</summary>
+
+  静态作用域 —— 函数的作用域基于函数创建的位置。
+
+  动态作用域 —— 函数的作用域基于函数的使用位置。
+
+  ```js
+  var value = 1;
+
+  function foo() {
+    console.log(value);
+  }
+
+  function bar() {
+    var value = 2;
+    foo();
+  }
+
+  bar(); // 输出 1 。JavaScript 采用的是词法作用域，也称为静态作用域。相同的，动态作用域此代码应该输出 2
+  ```
+
+  </details>
+
 - 函数柯里化的理解？
 
   <details>
