@@ -6,6 +6,17 @@
 
 ### **2019/04/22 - 2019/04/28**
 
+- 立即执行函数 ？
+
+  <details>
+  <summary>点击</summary>
+
+  立即执行函数（IIFE）常用于第三方库，好处在于隔离作用域，任何一个第三方库都会存在大量的变量和函数，为了避免变量污染（命名冲突），开发者们想到的解决办法就是使用立即执行函数。
+
+  通过定义一个匿名函数，创建了一个新的函数作用域，相当于创建了一个“私有”的命名空间，该命名空间的变量和方法，不会破坏污染全局的命名空间。此时若是想访问全局对象，将全局对象以参数形式传进去即可
+
+  </details>
+
 - 函数柯里化的理解？
 
   <details>
@@ -170,24 +181,24 @@
     var toString = Object.prototype.toString;
     var toType = {};
     var typeArr = [
-      "Undefined",
-      "Null",
-      "Boolean",
-      "Number",
-      "String",
-      "Object",
-      "Array",
-      "Function",
-      "Date",
-      "RegExp",
-      "Error",
-      "Arguments"
+      'Undefined',
+      'Null',
+      'Boolean',
+      'Number',
+      'String',
+      'Object',
+      'Array',
+      'Function',
+      'Date',
+      'RegExp',
+      'Error',
+      'Arguments',
     ];
     typeArr.map(function(item, index) {
-      toType["[object " + item + "]"] = item.toLowerCase();
+      toType['[object ' + item + ']'] = item.toLowerCase();
     });
 
-    return typeof obj !== "object" ? typeof obj : toType[toString.call(obj)];
+    return typeof obj !== 'object' ? typeof obj : toType[toString.call(obj)];
   }
   ```
 
@@ -203,7 +214,7 @@
     if (a === b) return true;
     if (a instanceof Date && b instanceof Date)
       return a.getTime() === b.getTime();
-    if (!a || !b || (typeof a !== "object" && typeof b !== "object"))
+    if (!a || !b || (typeof a !== 'object' && typeof b !== 'object'))
       return a === b;
     if (a.prototype !== b.prototype) return false;
     if (Array.isArray(a) && Array.isArray(b)) a.sort(), b.sort();
@@ -252,7 +263,7 @@
           //如果是数组
           target[key] = [];
           deepClone1(origin[key], target[key]); //递归
-        } else if (typeof origin[key] === "object" && origin[key] !== null) {
+        } else if (typeof origin[key] === 'object' && origin[key] !== null) {
           target[key] = {};
           deepClone1(origin[key], target[key]); //递归
         } else {
@@ -264,7 +275,7 @@
   }
 
   function deepClone2(data) {
-    if (!data || !(data instanceof Object) || typeof data === "function") {
+    if (!data || !(data instanceof Object) || typeof data === 'function') {
       return data;
     }
     var constructor = data.constructor;
@@ -284,8 +295,8 @@
       if (origin.hasOwnProperty(prop)) {
         //不能把原型链上的一起拷贝了
         //判断是元素类型还是引用类型
-        if (typeof origin[prop] == "object" && typeof origin[prop] !== "null") {
-          target[prop] = toStr.call(prop) == "[object Array]" ? [] : {};
+        if (typeof origin[prop] == 'object' && typeof origin[prop] !== 'null') {
+          target[prop] = toStr.call(prop) == '[object Array]' ? [] : {};
           arguments.callee(origin[prop], target[prop]); //递归调用
         } else {
           target[prop] = origin[prop]; //原始类型直接复制
@@ -297,12 +308,12 @@
   }
   function deepClone4(obj) {
     //判断是否是简单数据类型，
-    if (typeof obj == "object") {
+    if (typeof obj == 'object') {
       //复杂数据类型
       var result = obj.constructor == Array ? [] : {};
       for (let i in obj) {
         result[i] =
-          typeof obj[i] == "object" && obj[i] !== null
+          typeof obj[i] == 'object' && obj[i] !== null
             ? deepClone4(obj[i])
             : obj[i];
       }
@@ -630,7 +641,7 @@
 
   ```js
   function getMaxNumberOfChar(str) {
-    return (str + "").split("").reduce(
+    return (str + '').split('').reduce(
       function(pre, cur, index, arr) {
         cur in pre ? pre[cur]++ : (pre[cur] = 1);
         pre[cur] > pre.value && ((pre.char = cur), (pre.value = pre[cur]));
@@ -639,17 +650,17 @@
       { value: 0 }
     );
   }
-  getMaxNumberOfChar("ababccdeajxac"); // Object {value: 4, a: 4, char: "a", b: 2, c: 3…}
+  getMaxNumberOfChar('ababccdeajxac'); // Object {value: 4, a: 4, char: "a", b: 2, c: 3…}
   ```
 
   此外，可以考虑用正则来辅助处理：
 
   ```js
   function getMaxNumberOfChar(str) {
-    return (str + "")
-      .split("")
+    return (str + '')
+      .split('')
       .sort()
-      .join("")
+      .join('')
       .match(/(\w)\1*/g)
       .reduce(
         function(pre, cur) {
@@ -660,7 +671,7 @@
         { value: 0 }
       );
   }
-  getMaxNumberOfChar("ababccdeajxac"); // Object {value: 4, char: "a"}
+  getMaxNumberOfChar('ababccdeajxac'); // Object {value: 4, char: "a"}
   ```
 
   这里拓展一下 reduce 函数的用法
@@ -698,8 +709,8 @@
     console.log(args);
   }
 
-  a("haha", 1, 2, 3, 4, 5); // log出[1, 2, 3, 4, 5]
-  a("run", "-g", "-b"); // log出['-g', '-b']
+  a('haha', 1, 2, 3, 4, 5); // log出[1, 2, 3, 4, 5]
+  a('run', '-g', '-b'); // log出['-g', '-b']
   ```
 
   1. 首先，函数 call() 方法，第一个参数改变函数的 this 指向，后面剩余参数传入原函数 slice 中
@@ -749,11 +760,11 @@
     let that = this;
     //定义初始状态
     //Promise状态
-    that.status = "pending";
+    that.status = 'pending';
     //value
-    that.value = "undefined";
+    that.value = 'undefined';
     //reason 是一个用于描述Promise被拒绝原因的值。
-    that.reason = "undefined";
+    that.reason = 'undefined';
     //用来解决异步问题的数组
     that.onFullfilledArray = [];
     that.onRejectedArray = [];
@@ -761,9 +772,9 @@
     //定义resolve
     function resolve(value) {
       //当status为pending时，定义Javascript值，定义其状态为fulfilled
-      if (that.status === "pending") {
+      if (that.status === 'pending') {
         that.value = value;
-        that.status = "resolved";
+        that.status = 'resolved';
         that.onFullfilledArray.forEach(func => {
           func(that.value);
         });
@@ -773,9 +784,9 @@
     //定义reject
     function reject(reason) {
       //当status为pending时，定义reason值，定义其状态为rejected
-      if (that.status === "pending") {
+      if (that.status === 'pending') {
         that.reason = reason;
-        that.status = "rejected";
+        that.status = 'rejected';
         that.onRejectedArray.forEach(func => {
           func(that.reason);
         });
@@ -794,7 +805,7 @@
     let that = this;
     //需要修改下，解决异步问题，即当Promise调用resolve之后再调用then执行onFulfilled(that.value)。
     //用两个数组保存下onFulfilledArray
-    if (that.status === "pending") {
+    if (that.status === 'pending') {
       that.onFullfilledArray.push(value => {
         onFulfilled(value);
       });
@@ -804,11 +815,11 @@
       });
     }
 
-    if (that.status === "resolved") {
+    if (that.status === 'resolved') {
       onFulfilled(that.value);
     }
 
-    if (that.status === "rejected") {
+    if (that.status === 'rejected') {
       onRejected(that.reason);
     }
   };
