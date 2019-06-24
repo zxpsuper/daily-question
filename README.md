@@ -12,14 +12,18 @@
 
   <details>
   <summary>点击</summary>
-  这个时候就需要给 a 标签添加一个属性“download”，如：
 
-  ```html
-  <a
-    href="https://github.com/zxpsuper/Demo/archive/master.zip"
-    download="master.zip"
-    >点击下载</a
-  >
+  页面加载时只执行 `onload` 事件。
+
+  页面关闭时，先 `onbeforeunload` 事件，再 `onunload` 事件。
+
+  页面刷新时先执行 `onbeforeunload` 事件，然后 `onunload` 事件，最后 `onload` 事件。
+
+  因此监听 `onbeforeunload` 事件，如下：
+
+  ```js
+  window.addEventListener('beforeunload', e => this.beforeunloadFn(e));
+  window.removeEventListener('beforeunload', e => this.beforeunloadFn(e));
   ```
 
   </details>
