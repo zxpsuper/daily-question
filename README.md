@@ -8,7 +8,39 @@
 
 ---
 
-- 立即执行函数 ？
+- 监听页面关闭或者刷新事件？
+
+  <details>
+  <summary>点击</summary>
+  这个时候就需要给 a 标签添加一个属性“download”，如：
+
+  ```html
+  <a
+    href="https://github.com/zxpsuper/Demo/archive/master.zip"
+    download="master.zip"
+    >点击下载</a
+  >
+  ```
+
+  </details>
+
+* 如何实现点击按钮下载文件？
+
+  <details>
+  <summary>点击</summary>
+  这个时候就需要给 a 标签添加一个属性“download”，如：
+
+  ```html
+  <a
+    href="https://github.com/zxpsuper/Demo/archive/master.zip"
+    download="master.zip"
+    >点击下载</a
+  >
+  ```
+
+  </details>
+
+* 立即执行函数 ？
 
   <details>
   <summary>点击</summary>
@@ -23,7 +55,7 @@
 
   </details>
 
-- 函数柯里化的理解？
+* 函数柯里化的理解？
 
   <details>
   <summary>点击</summary>
