@@ -4,9 +4,107 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/04/29 - 2019/05/05**
+
+- `==` 的类型转化规则
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  [] == false // true
+
+  {} == false  // false
+  ```
+
+  1，null 和 undefined，相等。
+
+  2，数字和字符串，转化为数字再比较。
+
+  3，如果有 true 或 false，转换为 1 或 0，再比较。
+
+  4，如果有引用类型，优先调用 valueOf。
+
+  5，其余都不相等。
+
+  </details>
+
+- `DOM` 和 `BOM` 有什么区别 ?
+
+  <details>
+  <summary>点击</summary>
+
+  - DOM
+    Document Object Model，文档对象模型
+
+  DOM 是为了操作文档出现的 API，document 是其的一个对象
+
+  DOM 和文档有关，这里的文档指的是网页，也就是 html 文档。DOM 和浏览器无关，他关注的是网页本身的内容。
+
+  - BOM
+    Browser Object Model，浏览器对象模型
+
+  BOM 是为了操作浏览器出现的 API，window 是其的一个对象
+
+  window 对象既为 javascript 访问浏览器提供 API，同时在 ECMAScript 中充当 Global 对象
+
+  </details>
+
+- `doctype`有什么用?
+
+  <details>
+  <summary>点击</summary>
+
+  doctype 是一种标准通用标记语言的文档类型声明，目的是告诉标准通用标记语言解析器要使用什么样的文档类型定义（DTD）来解析文档。
+
+  声明是用来指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令。 声明必须是 HTML 文档的第一行，位于 html 标签之前。
+  浏览器本身分为两种模式，一种是标准模式，一种是怪异模式，浏览器通过 doctype 来区分这两种模式，doctype 在 html 中的作用就是触发浏览器的标准模式，如果 html 中省略了 doctype，浏览器就会进入到 Quirks 模式的怪异状态，在这种模式下，有些样式会和标准模式存在差异，而 html 标准和 dom 标准值规定了标准模式下的行为，没有对怪异模式做出规定，因此不同浏览器在怪异模式下的处理也是不同的，所以一定要在 html 开头使用 doctype。
+
+  </details>
+
+- 箭头函数和普通函数有什么区别?
+
+  <details>
+  <summary>点击</summary>
+
+  - 函数体内的 this 对象，就是定义时所在的对象，而不是使用时所在的对象，用 call apply bind 也不能改变 this 指向
+  - 不可以当作构造函数，也就是说，不可以使用 new 命令，否则会抛出一个错误。
+  - 不可以使用 arguments 对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+  - 不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数。
+  - 箭头函数没有原型对象 prototype
+    </details>
+
 ### **2019/04/22 - 2019/04/28**
 
 ---
+
+- `new` 一个对象经历了什么
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  function Test() {}
+  const test = new Test();
+  ```
+
+  1. 创建一个对象 `const obj = {}`
+
+  2. 设置新对象的 constructor 属性为构造函数的名称，设置新对象的**proto**属性指向构造函数的 prototype 对象
+
+  ```js
+  obj.constructor = Test;
+  obj.__proto__ = Test.prototype;
+  ```
+
+  3. 使用新对象调用函数，函数中的 this 被指向新实例对象 `Test.call(obj)`
+
+  4. 将初始化完毕的新对象地址，保存到等号左边的变量中
+     </details>
+
+- `event.target` 和 `event.currentTarget` 区别
+
+`event.target` 返回触发事件的元素, `event.currentTarget` 返回绑定事件的元素
 
 - Vue `<transition>` 的类名详解？
 
@@ -88,6 +186,29 @@
   在数学和计算机科学中，柯里化是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。
 
   那究竟柯里化有什么作用呢？常见的作用是：参数复用、延迟运行、扁平化
+
+  函数柯里化（curry）的定义很简单：传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。
+
+  比如对于加法函数 `var add = (x, y) => x + y` ，我们可以这样进行柯里化：
+
+  ```js
+  //比较容易读懂的ES5写法
+  var add = function(x) {
+    return function(y) {
+      return x + y;
+    };
+  };
+
+  //ES6写法，也是比较正统的函数式写法
+  var add = x => y => x + y;
+
+  //试试看
+  var add2 = add(2);
+  var add200 = add(200);
+
+  add2(2); // =>4
+  add200(50); // =>250
+  ```
 
   </details>
 
@@ -308,6 +429,8 @@
 
   闭包就是能够读取其他函数内部变量的函数，或者子函数在外调用，子函数所在的父函数的作用域不会被释放。
 
+  因为闭包引用着另一个函数的变量，导致另一个函数已经不使用了也无法销毁，所以闭包使用过多，会占用较多的内存，这也是一个副作用。
+
 - js 的 new 操作符做了哪些事情 ?
 
   new 操作符新建了一个空对象，这个对象原型指向构造函数的 prototype，执行构造函数后返回这个对象。
@@ -461,7 +584,7 @@
       }
     };
   }
-  // 定时器
+  // 定时器,延迟执行
   function throttle(func, wait) {
     var timeout;
 
