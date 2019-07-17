@@ -4,7 +4,52 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/05/06 - 2019/05/12**
+
+---
+
 ### **2019/04/29 - 2019/05/05**
+
+---
+
+- `ES6 class` 构造以及继承的底层实现原理
+
+  [《ES6 类以及继承的实现原理》](https://segmentfault.com/a/1190000014798678)
+
+- 手动实现一个 `new` ?
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  function myNew(Obj, ...args) {
+    var obj = Object.create(Obj.prototype); //使用指定的原型对象及其属性去创建一个新的对象
+    Obj.apply(obj, args); // 绑定 this 到obj, 设置 obj 的属性
+    return obj; // 返回实例
+  }
+  ```
+
+  </details>
+
+- 手动实现一个 instanceof?
+
+  <details>
+  <summary>点击</summary>
+  `instanceof` 其原理就是判断实例对象的 `__proto__` 是不是强等于对象的`prototype` 属性，如果不是继续往原型链上找，直到 `__proto__` 为 `null` 为止。
+  ```js
+  function instanceOf(obj, object) {//obj 表示实例对象，object 表示对象
+    var O = object.prototype;
+    obj = obj.__proto__;
+    while (true) { 
+        if (obj === null) 
+            return false; 
+        if (O === obj) // 这里重点：当 O 严格等于 obj 时，返回 true 
+            return true; 
+        obj = obj.__proto__; 
+    } 
+  }
+  ```
+  </details>
 
 - `==` 的类型转化规则
 
