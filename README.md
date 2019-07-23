@@ -8,6 +8,90 @@
 
 ---
 
+- `JavaScript` 异常处理的方式，统一的异常处理方案
+
+- 如何解决页面加载海量数据而不冻结前端 UI ?
+
+  <details>
+  <summary>点击</summary>
+
+  ```
+  题目：10w 条记录的数组，一次性渲染到页面上，如何处理可以不冻结UI？
+  ```
+
+  分治思想，在一定的时间内多次加载数据，直至渲染完成，使用 `window.requestAnimationFrame` 和 `document.createDocumentFragment()` 实现
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>页面加载海量数据</title>
+    </head>
+
+    <body>
+      <ul id="list-with-big-data">
+        100000 数据
+      </ul>
+      <script>
+        // 此处添加你的代码逻辑
+        (function() {
+          const ulContainer = document.getElementById('list-with-big-data');
+
+          // 防御性编程
+          if (!ulContainer) {
+            return;
+          }
+
+          const total = 100000; // 插入数据的总数
+          const batchSize = 4; // 每次批量插入的节点个数，个数越多，界面越卡顿
+          const batchCount = total / batchSize; // 批处理的次数
+          let batchDone = 0; // 已完成的批处理个数
+
+          function appendItems() {
+            // 使用 DocumentFragment 减少 DOM 操作次数，对已有元素不进行回流
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 0; i < batchSize; i++) {
+              const liItem = document.createElement('li');
+              liItem.innerText = batchDone * batchSize + i + 1;
+              fragment.appendChild(liItem);
+            }
+
+            // 每次批处理只修改 1 次 DOM
+            ulContainer.appendChild(fragment);
+            batchDone++;
+            doAppendBatch();
+          }
+
+          function doAppendBatch() {
+            if (batchDone < batchCount) {
+              // 在重绘之前，分批插入新节点
+              window.requestAnimationFrame(appendItems);
+            }
+          }
+
+          // kickoff
+          doAppendBatch();
+
+          // 使用 事件委托 ，利用 JavaScript 的事件机制，实现对海量元素的监听，有效减少事件注册的数量
+          ulContainer.addEventListener('click', function(e) {
+            const target = e.target;
+
+            if (target.tagName === 'LI') {
+              alert(target.innerText);
+            }
+          });
+        })();
+      </script>
+    </body>
+  </html>
+  ```
+
+  </details>
+
 ### **2019/04/29 - 2019/05/05**
 
 ---
