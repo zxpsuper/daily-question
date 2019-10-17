@@ -8,6 +8,60 @@
 
 ---
 
+- 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+  ```js
+  let arr = [2, 2, 1, 4, 4, 5, 5, 1, 8];
+  // 实现一个singleNumber找出不重复的8
+  ```
+
+  <details>
+  <summary>点击</summary>
+
+  这道题第一眼看过去，思路挺简单的，我们只需要维护一个对象来记录每一个元素出现的次数，使用元素的值作为 key,元素出现的次数作为 value。之后再遍历这个对象，找到 value 为 1 的 key。对应的 key 就是那个元素。
+
+  ```js
+  function singleNumber(nums) {
+    const obj = {};
+    for (let i = 0; i < nums.length; i++) {
+      obj[nums[i]] = obj[nums[i]] ? obj[nums[i]] + 1 : 1;
+    }
+    for (let key in obj) {
+      if (obj[key] === 1) {
+        return Number(key); // 由于 key 是 string ,因此我们这里需要转化下
+      }
+    }
+  }
+
+  console.log(singleNumber([2, 2, 1, 4, 4, 5, 5, 1, 8])); // 8
+  ```
+
+  当然，更好的解法是用异或解决，两个相同数异或得 0，因此不断异或，最后剩下得就是不重复的数字
+
+  ```js
+  function singleNumber(nums) {
+    for (let i = 1; i < nums.length; i++) {
+      nums[0] ^= nums[i];
+    }
+    return nums[0];
+  }
+
+  console.log(singleNumber([2, 2, 1, 4, 4, 5, 5, 1, 8]));
+  ```
+
+  </details>
+
+- `hash` 路由和 `history` 路由的区别？
+
+  <details>
+  <summary>点击</summary>
+
+  路由的哈希模式其实是利用了 `window` 可以监听 `onhashchange` 事件，也就是说你的 `url` 中的哈希值（#后面的值）如果有变化，前端是可以做到监听并做一些响应（搞点事情），这么一来，即使前端并没有发起 `http` 请求他也能够找到对应页面的代码块进行按需加载。
+
+  路由的 `history` 模式其实是利用了 `pushState` 与 `replaceState` 这两个神器，其作用就是可以将 `url`替换并且不刷新页面，好比挂羊头卖狗肉，`http` 并没有去请求服务器该路径下的资源，一旦刷新就会暴露这个实际不存在的“羊头”，显示`404`。
+
+  </details>
+
 - `HTML` 和 `XHTML` 有什么区别？
 
   <details>
