@@ -4,11 +4,98 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/05/27 - 2019/06/02** :watch:
+
+---
+
+-
+
+  <details>
+  <summary>点击</summary>
+  
+  </details>
+
 ### **2019/05/20 - 2019/05/26** :watch:
 
 ---
 
-- 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+- null 是一种数据类型，可为什么 `typeof null === 'object'` ?
+
+  <details>
+  <summary>点击</summary>
+
+  虽然 `typeof null` 会输出 `object`，但是这只是 `JS` 存在的一个悠久 `Bug`。在 `JS` 的最初版本中使用的是 `32` 位系统，为了性能考虑使用低位存储变量的类型信息，`000` 开头代表是对象然而 `null` 表示为全零，所以将它错误的判断为 `object` 。
+
+  </details>
+
+- 介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+
+  <details>
+  <summary>点击</summary>
+
+  - Set
+    - 成员唯一、无序且不重复[value, value]，键值与键名是一致的（或者说只有键值，没有键名）
+    - 可以遍历，方法有：add、delete、has
+  - WeakSet
+    - 成员都是对象
+    - 成员都是弱引用，可以被垃圾回收机制回收，可以用来保存 DOM 节点，不容易造成内存泄漏
+    - 不能遍历，方法有 add、delete、has
+  - Map
+    - 本质上是键值对的集合，类似集合
+    - 可以遍历，方法很多可以跟各种数据格式转换
+  - WeakMap
+    - 只接受对象作为键名（null 除外），不接受其他类型的值作为键名
+    - 键名是弱引用，键值可以是任意的，键名所指向的对象可以被垃圾回收，此时键名是无效的
+    - 不能遍历，方法有 get、set、has、delete
+
+  </details>
+
+- 实现一个方法取多个数组的并集
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  function merge(...args) {
+    let arr = [];
+    for (let i = 0; i < args.length; i++) {
+      arr = arr.concat(args[i]);
+      console.log(args[i]);
+    }
+    return [...new Set(arr)];
+  }
+
+  console.log(merge([0, 1, 2, 3], [1, 2, 3, 8], [1, 10])); // [ 0, 1, 2, 3, 8, 10 ]
+  ```
+
+  </details>
+
+- 实现一个方法取多个数组的交集
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  function intersect(...args) {
+    if (args.length === 0) {
+      return [];
+    }
+
+    if (args.length === 1) {
+      return args[0];
+    }
+
+    return args.reduce((result, arg) => {
+      return result.filter(item => arg.includes(item));
+    });
+  }
+
+  console.log(intersect([0, 1, 2, 3], [1, 2, 3], [1])); // [1]
+  ```
+
+  </details>
+
+* 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
 
   ```js
   let arr = [2, 2, 1, 4, 4, 5, 5, 1, 8];
@@ -51,7 +138,7 @@
 
   </details>
 
-- `hash` 路由和 `history` 路由的区别？
+* `hash` 路由和 `history` 路由的区别？
 
   <details>
   <summary>点击</summary>
@@ -62,7 +149,7 @@
 
   </details>
 
-- `HTML` 和 `XHTML` 有什么区别？
+* `HTML` 和 `XHTML` 有什么区别？
 
   <details>
   <summary>点击</summary>
