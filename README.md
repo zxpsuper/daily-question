@@ -8,11 +8,150 @@
 
 ---
 
--
+- 几种进制的相互转换计算方法，在 JavaScript 中如何表示和转换
+
+  <details>
+    <summary>点击</summary>
+    
+  `parseInt(str, radix)` 将一个 radix 进制的 str 转化为十进制，`parseInt('23',8) // 19`，将八进制的‘23’转化为10进制的‘19’
+
+  `number.toString(radix)` 将一个数字转化为 radix 进制的数字字符串
+  ```js
+  0x11.toString(8) // 21
+  0x11.toString(10) // 17
+  0x11.toString(2) // 10001
+  ```
+  </details>
+
+- 使用CSS绘制几何图形（圆形、三角形、扇形、菱形等）
+  <details>
+    <summary>点击</summary>
+
+  ```css
+  /* 圆形 */
+  .circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:blue;
+  }
+  /* 三角形 */
+  .triangle {
+      width: 0;
+      height: 0;
+      border: 50px solid blue;
+      /* 通过改变边框颜色，可以改变三角形的方向 */
+      border-color: blue transparent transparent transparent;
+  }
+  /* 扇形，扇形是由一个圆形和一个矩形进行组合得到的，用矩形遮住圆形的一部分就形成了扇形。 */
+  .sector {
+      width: 142px;
+      height: 142px;
+      background: #fff;
+      border-radius: 50%;
+      background-image: linear-gradient(to right, transparent 50%, #655 0);
+  }
+
+  .sector::before {
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+    width: 100%;
+      background-color: inherit;
+      transform-origin: left;
+    /*调整角度，改变扇形大小*/
+      transform: rotate(230deg);
+  }
+  /* 菱形 */
+  .rhombus {
+      width: 200px;
+      height: 200px;
+      transform: rotateZ(45deg) skew(30deg, 30deg);
+      background: blue;
+  }
+  ```
+  </details>
+
+- BFC 实现原理，可以解决的问题，如何创建BFC
+
+  <details>
+  <summary>点击</summary>
+
+  `BFC(Block formatting context)` 直译为"块级格式化上下文"。它是一个独立的渲染区域，只有块级元素参与， 它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。 
+
+  **BCF 可以解决的问题**：浮动定位，消除外边距折叠，清除浮动，自适应多栏布局
+
+  **BFC的创建**：根元素或包含根元素的元素，浮动元素(`float` 不为 `none`)，绝对定位元素( `position` 为 `absolute` 或者 `fixed`)，`display` 为 `inline-block,table-cell,table-caption，overflow` 值不为 `visible`，弹性元素( `flex` 布局)，网格元素( `grid` 布局)
+  </details>
+
+
+- 理解 JavaScript 的执行上下文栈，可以应用堆栈信息快速定位问题
+  <details>
+    <summary>点击</summary>
+    
+    **执行上下文** 就是当前 `JavaScript` 代码被解析和执行时所在环境的抽象概念， `JavaScript` 中运行任何的代码都是在执行上下文中运行。
+    
+    执行上下文总共有三种类型：全局执行上下文, 函数执行上下文, `Eval` 函数执行上下文
+    
+    **执行栈**，在其他编程语言中也被叫做调用栈，具有 LIFO（后进先出）结构，用于存储在代码执行期间创建的所有执行上下文。
+      
+  </details>
+
+- null 和 undefined 的区别
 
   <details>
   <summary>点击</summary>
   
+  1. `Number` 转换的值不同，`Number(null)` 输出为 `0`, `Number(undefined)` 输出为 `NaN`
+  
+  2. `null` 表示一个值被定义了，但是这个值是空值
+  
+  3. `undefined` 表示缺少值，即此处应该有值，但是还没有定义
+  </details>
+
+- 理解值类型和引用类型
+
+  <details>
+  <summary>点击</summary>
+
+  JavaScript中的变量分为基本类型和引用类型:
+
+  基本类型: 保存在栈内存中的简单数据段，它们的值都有固定的大小，保存在栈空间，通过按值访问
+
+  引用类型: 保存在堆内存中的对象，值大小不固定，栈内存中存放的该对象的访问地址指向堆内存中的对象，`JavaScript` 不允许直接访问堆内存中的位置，因此操作对象时，实际操作对象的引用
+  </details>
+
+- 基本类型对应的内置对象，以及他们之间的装箱拆箱操作
+
+  <details>
+  <summary>点击</summary>
+  
+  `String(), Number(), Boolean()`
+  
+  装箱：就是把基本类型转变为对应的对象。装箱分为隐式和显示
+  
+  ```js
+    // 隐式装箱： 每当读取一个基本类型的值时，后台会创建一个该基本类型所对应的对象。
+    // 在这个基本类型上调用方法，其实是在这个基本类型对象上调用方法。
+    // 这个基本类型的对象是临时的，它只存在于方法调用那一行代码执行的瞬间，执行方法后立刻被销毁。
+    let num=123;
+    num.toFixed(2); // '123.00'//上方代码在后台的真正步骤为
+    var c = new Number(123);
+    c.toFixed(2);
+    c = null;
+    // 显式装箱: 通过内置对象 Boolean、Object、String 等可以对基本类型进行显示装箱。
+    var obj = new String('123');
+  ```
+  
+  拆箱: 拆箱与装箱相反，把对象转变为基本类型的值。
+  
+  ```js
+    Number([1]); //1
+    // 转换演变：
+    [1].valueOf(); // [1];
+    [1].toString(); // '1';Number('1'); //1 
+  ```
   </details>
 
 ### **2019/05/20 - 2019/05/26** :watch:
@@ -819,7 +958,15 @@
 ### **2019/04/08 - 2019/04/14** :watch:
 
 ---
+- 宏任务和微任务分别有哪些
+  <details>
+    <summary>点击</summary>
+    
+  **宏任务**： setTimeout，setInterval，setImmediate (Node独有)，requestAnimationFrame (浏览器独有)，I/O，UI rendering (浏览器独有)
 
+  **微任务**： process.nextTick (Node独有)，Promise，Object.observe，MutationObserver
+
+  </details>
 - 写一个“终极类型”判断函数？
 
   <details>
