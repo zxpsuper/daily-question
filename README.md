@@ -85,7 +85,6 @@
   **BFC的创建**：根元素或包含根元素的元素，浮动元素(`float` 不为 `none`)，绝对定位元素( `position` 为 `absolute` 或者 `fixed`)，`display` 为 `inline-block,table-cell,table-caption，overflow` 值不为 `visible`，弹性元素( `flex` 布局)，网格元素( `grid` 布局)
   </details>
 
-
 - 理解 JavaScript 的执行上下文栈，可以应用堆栈信息快速定位问题
   <details>
     <summary>点击</summary>
