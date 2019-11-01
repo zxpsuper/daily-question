@@ -20,11 +20,11 @@
 
 ---
 
-- 为什么 var 可以重复声明？
+- 为什么 **var** 可以重复声明？
 
-  因为编译器会在判断有已经声明的同名变量时忽略 var，然后直接赋值
+  因为编译器会在判断有已经声明的同名变量时忽略 **var**，然后直接赋值
 
-- requestAnimationFrame 实现的动画如何清除？
+- **requestAnimationFrame** 实现的动画如何清除？
 
     <details>
     <summary>点击</summary>
@@ -39,7 +39,7 @@
 
     </details>
 
-- js 动画为何推荐用 **requestAnimationFrame** 而不用 **setTimeout** ?
+- **js** 动画为何推荐用 **requestAnimationFrame** 而不用 **setTimeout** ?
 
     <details>
     <summary>点击</summary>
@@ -64,13 +64,13 @@
 
     </details>
 
-* 如何获取页面某个元素的背景色 background-color?
+* 如何获取页面某个元素的背景色 **background-color**?
 
 - 首屏渲染白屏的原因可能有哪些？
 
-- 为何要控制 http 的请求个数？
+- 为何要控制 **http** 的请求个数？
 
-- 淘宝 flex 的原理？
+- 淘宝 **flex** 的原理？
 
 ### **2019/06/03 - 2019/06/09** :watch:
 
@@ -78,13 +78,13 @@
 
 - 缓存策略？
 
-- 为什么要将 小图标 转化为 base64 ?
+- 为什么要将 **小图标** 转化为 **base64** ?
 
-- webpack 流程是怎样子的？
+- **webpack** 流程是怎样子的？
 
-- xss 攻击如何防止窃取 cookie ?
+- **XSS** 攻击如何防止窃取 **cookie** ?
 
-- xss 攻击会造成怎样的影响 ?
+- XSS 攻击会造成怎样的影响 ?
 
 * 如何防止网络攻击？
 
