@@ -2,5 +2,8 @@
   "devDependencies": {
     "inquirer": "^6.5.0",
     "shelljs": "^0.8.3"
+  },
+  "scripts": {
+    "commit": "node ./git-commit.js"
   }
 }
