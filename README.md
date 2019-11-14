@@ -6,14 +6,88 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/07/08 - 2019/07/14** :watch:
+
+---
+
+- Git 如何打标签和切换标签？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  // 附注标签
+  git tag -a v1.1.0 -m 'v1.1.0 release'
+
+  // 本地推送到远程
+  git push origin <tag name>  // 推送一个标签到远程
+
+  git push origin --tags   // 推送全部未推送的本地标签
+
+  // 本地删除标签
+  git tag -d <tag name>
+
+  // 远程删除标签
+  git push origin :refs/tags/<tag name>   // 本地tag删除了，在执行该句，删除远程tag
+  ```
+
+  </details>
+
+- decodeURI 与 decodeURIComponent 区别 ?
+
+  <details>
+  <summary>点击</summary>
+
+  encodeURI()和 encodeURIComponent()方法可以对 URI 进行编码，以便发送给浏览器。有效的 URI 中不能包含某些字符，例如空格。而这 URI 编码方法就可以对 URI 进行编码，它们用特殊的 UTF-8 编码替换所有无效的字 符，从而让浏览器能够接受和理解。
+
+  它们的主要区别在于，encodeURI() 不会对本身属于 URI 的特殊字符进行编码，例如冒号、正斜杠、问号和井字号；而 encodeURIComponent() 则会对它发现的任何非标准字符进行编码。
+  </detail>
+
+* 取整有几种方式？
+
+  <details>
+  <summary>点击</summary>
+
+  ```JS
+  var a = ~~2.33 // ~是按位非，就是每一位取反，~~常用来取整
+
+  var b= 2.33 | 0 // 或运算
+
+  var c= 2.33 >> 0
+
+  ```
+
+  </details>
+
 ### **2019/07/01 - 2019/07/07** :watch:
 
 ---
 
+- 什么是临时性死区？
+
+- 如何使用 javascript 实现枚举？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  // 可以 Object.freeze 来实现枚举,枚举对象的属性不会被改变
+  var DaysEnum = Object.freeze({
+    monday: 1,
+    tuesday: 2,
+    wednesday: 3,
+  });
+  ```
+
+  </details>
+
+- 去除 webpack 开启 dev 服务时的日志打印？
+
+  webpack dev 配置中添加属性 `stats: 'errors-only'`
+
 - 如何获取 iframe 中的 cookie ?
 
 - 如何跳出 forEach 循环？
-
 
   <details>
   <summary>点击</summary>
@@ -21,60 +95,66 @@
   首先，看一段代码
 
   ```js
-  var a = [1, 2, 3, 4, 5]
-  a.forEach(item=>{
-      console.log(item); //输出：1,2
-      if (item === 2) {
-          //todo 想办法跳出循环
-      }
-  })
+  var a = [1, 2, 3, 4, 5];
+  a.forEach(item => {
+    console.log(item); //输出：1,2
+    if (item === 2) {
+      //todo 想办法跳出循环
+    }
+  });
   ```
-  此时，使用break或者return 并不能跳出循环，为何？foreach编译后代码如下：
+
+  此时，使用 break 或者 return 并不能跳出循环，为何？foreach 编译后代码如下：
+
   ```js
   const arr = [1, 2, 3, 4, 5];
   for (let i = 0; i < arr.length; i++) {
     const rs = (function(item) {
       console.log(item);
       if (item > 2) return false;
-    })(arr[i])
+    })(arr[i]);
   }
   // 因此无法跳出循环
   ```
-  1. 抛出一个错误可以结束forEach循环
+
+  1. 抛出一个错误可以结束 forEach 循环
 
   ```js
   try {
     [1, 2, 3, 4, 5].forEach(function(item) {
-      if (item=== 2) throw item;
+      if (item === 2) throw item;
       console.log(item);
     });
   } catch (e) {}
   ```
+
   2. 使用 splice 或 array.length
 
-  已删除的项不会被遍历到。如果已访问的元素在迭代时被删除，之后的元素将被跳过。因此我们可以用length 或 splice 来修改数组
+  已删除的项不会被遍历到。如果已访问的元素在迭代时被删除，之后的元素将被跳过。因此我们可以用 length 或 splice 来修改数组
 
   ```js
-  var arr=[1,2,3,4,5];
-  arr.forEach((item,index)=>{
-      console.log(item)
-      if(item===2){
-          arr.length=index;
-      }
-  })
+  var arr = [1, 2, 3, 4, 5];
+  arr.forEach((item, index) => {
+    console.log(item);
+    if (item === 2) {
+      arr.length = index;
+    }
+  });
   ```
-  直接修改数组的length, 原数组便发生了更改，有时候我们并不要这种更改，因此我们可以使用一个小技巧，即将数组从0开始截断，然后重新赋值给数组也就是array=array.splice(0)
+
+  直接修改数组的 length, 原数组便发生了更改，有时候我们并不要这种更改，因此我们可以使用一个小技巧，即将数组从 0 开始截断，然后重新赋值给数组也就是 array=array.splice(0)
 
   ```js
-  var arr=[1,2,3,4,5];
-  arr.forEach((item,index)=>{
-      console.log(item)
-      if(item===2){
-          arr=arr.splice(0);
-      }
-  })
+  var arr = [1, 2, 3, 4, 5];
+  arr.forEach((item, index) => {
+    console.log(item);
+    if (item === 2) {
+      arr = arr.splice(0);
+    }
+  });
   // 数组被清空后又将删除的元素数组赋值给原数组，因此原数组没有变化且跳出了循环
   ```
+
   </details>
 
 - IP 地址和 Mac 地址有什么区别？
