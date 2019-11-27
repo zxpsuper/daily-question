@@ -8,9 +8,175 @@
 
 强迫自己形成积累的习惯，鞭挞自己不断前行，共同学习。
 
+### **2019/07/22 - 2019/07/28** :watch:
+
+---
+
+### **2019/07/15 - 2019/07/21** :watch:
+
+---
+
+- js 如何实现数组降维？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  const oldArr = [
+    1,
+    [2, [3], [4, 5, 6], [7, 8, 9], 10, 11],
+    12,
+    13,
+    14,
+    [15, 16, 17],
+  ];
+
+  const newArr = [];
+
+  // 1. 递归降维
+  const ergodic = arr => {
+    arr.forEach(item => {
+      if (Array.isArray(item)) {
+        ergodic(item);
+      } else {
+        newArr.push(item);
+      }
+    });
+  };
+  ergodic(oldArr);
+
+  console.log(newArr);
+  // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+
+  // 2. es6 flat() 降维
+  newArr = oldArr.flat(Infinity); //Infinity表示正无穷大
+  ```
+
+  </details>
+
+- vue 中函数式组件的使用场景？
+
+  <details>
+  <summary>点击</summary>
+
+  函数组件是无状态的，在它们的核心中，它们只是可执行的函数，接受一些输入并根据其提供输出。
+
+  函数式组件只是函数，所以渲染开销也低很多，这也意味着它们是非常高效的，不需要花太多时间渲染。
+
+  </details>
+
+- 如何快速转化为 Number 类型？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  let num = '15';
+  num = +num; // 15
+
+  let bool = true;
+  bool = +bool; // 1
+  ```
+
+  </details>
+
+- JSON.parse(JSON.stringify(obj))实现深度克隆的缺点是什么？
+
+  <details>
+  <summary>点击</summary>
+
+  1. 他无法实现对函数 、RegExp 等特殊对象的克隆
+
+  2. 会抛弃对象的 constructor,所有的构造函数会指向 Object
+
+  3. 对象有循环引用,会报错
+
+  </details>
+
+- IPV6 与 IPV4 相比的优势在哪？
+
+  <details>
+  <summary>点击</summary>
+
+  - IP 地址扩大（目前 IPv4 地址不足的问题由 NAT 解决，NAT 是一种在 IP 数据包通过路由器或防火墙时重写源 IP 地址或目标地址的技术。这种技术被用于多台主机使用单个公有 IP 访问互联网的私有网络中。）
+
+  - 包首部长度固定 40 字节，路由器不在做分片操作，直接在发送端主机分片
+
+  - 不需 DHCP 服务器也能自动分配 IP 地址
+
+  - 使用认证和加密功能
+
+  </details>
+
+* 为什么框架中更喜欢用 Object.create(null) 而不是字面量呢？
+
+  <details>
+  <summary>点击</summary>
+
+  `Object.create(null)`创建的对象，没有任何属性，显示 No properties，我们可以把它当作一个非常纯净的 map 来使用，我们可以自己定义 hasOwnProperty、toString 方法，不管是有意还是不小心，我们完全不必担心会将原型链上的同名方法覆盖掉。
+
+  **使用的场景：**
+
+  1. 你需要一个非常干净且高度可定制的对象当作数据字典的时候；
+  2. 想节省 hasOwnProperty 带来的一丢丢性能损失并且可以偷懒少些一点代码的时候
+
+  </details>
+
+* HTTP 常用返回码？
+
+  <details>
+  <summary>点击</summary>
+
+  - 2XX 成功
+
+    - 200 OK，表示从客户端发来的请求在服务器端被正确处理
+    - 204 No content，表示请求成功，但响应报文不含实体的主体部分
+    - 205 Reset Content，表示请求成功，但响应报文不含实体的主体部分，但是与 204 响应不同在于要求请求方重置内容
+    - 206 Partial Content，进行范围请求
+
+  - 3XX 重定向
+
+    - 301 moved permanently，永久性重定向，表示资源已被分配了新的 URL
+    - 302 found，临时性重定向，表示资源临时被分配了新的 URL
+    - 303 see other，表示资源存在着另一个 URL，应使用 GET 方法获取资源
+    - 304 not modified，表示服务器允许访问资源，但因发生请求未满足条件的情况
+    - 307 temporary redirect，临时重定向，和 302 含义类似，但是期望客户端保持请求方法不变向新的地址发出请求
+
+  - 4XX 客户端错误
+
+    - 400 bad request，请求报文存在语法错误
+    - 401 unauthorized，表示发送的请求需要有通过 HTTP 认证的认证信息
+    - 403 forbidden，表示对请求资源的访问被服务器拒绝
+    - 404 not found，表示在服务器上没有找到请求的资源
+
+  - 5XX 服务器错误
+
+    - 500 internal sever error，表示服务器端在执行请求时发生了错误
+    - 501 Not Implemented，表示服务器不支持当前请求所需要的某个功能
+    - 503 service unavailable，表明服务器暂时处于超负载或正在停机维护，无法处理请求
+
+  </details>
+
 ### **2019/07/08 - 2019/07/14** :watch:
 
 ---
+
+- Vue 的 nextTick 原理？
+
+- 跨标签页的通讯方式有哪些？
+
+- 如何从 10000 个数中找到最大的 10 个数？
+
+- Load 和 DOMContentLoaded 事件的区别？
+
+  <details>
+  <summary>点击</summary>
+
+  Load 事件触发代表页面中的 DOM，CSS，JS，图片已经全部加载完毕。
+
+  DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析，不需要等待 CSS，JS，图片加载。
+
+  </details>
 
 - Git 如何打标签和切换标签？
 
