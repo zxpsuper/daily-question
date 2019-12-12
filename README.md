@@ -10,6 +10,87 @@
 
 ### **2019/07/29 - 2019/08/04** :watch:
 
+- 实现一个LazyMan，可以按照以下方式调用
+  > LazyMan(“Hank”) 输出: Hi! This is Hank!
+  > 
+  > LazyMan(“Hank”).sleep(10).eat(“dinner”) 输出 Hi! This is Hank! // 等待10秒.. Wake up after 10 Eat dinner~
+  >
+  > LazyMan(“Hank”).eat(“dinner”).eat(“supper”) 输出 Hi This is Hank! Eat dinner~ Eat supper~
+
+  <details>
+  <summary>点击</summary>
+  
+  ```js
+
+  class LazyMan {
+    constructor(name) {
+      this.name = name
+      this.asyncFun = Promise.resolve()
+      console.log(`--------- 我就是 ${this.name}! ---------`)
+    }
+    sleep(delay) {
+      this.asyncFun = this.asyncFun.then(() => {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            console.log(`--------- 我睡了 ${delay / 1000}s 然后 ----------`)
+            resolve()
+          }, delay);
+        })
+      })
+      return this; //提供 ”链式调用“
+    }
+    eat(food) {
+      this.asyncFun = this.asyncFun.then(() => {
+        console.log(`--------- 吃 ${food}~ ---------`)
+        return Promise.resolve()
+      })
+      return this;
+    }
+  }
+
+  new LazyMan('小皮咖').sleep(4000).eat('豆浆').eat('油条').sleep(2000).eat('炒年糕')
+  ```
+  </details>
+
+- vue.$set 的作用是？
+
+  向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性 
+
+- 手写一个sleep函数？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  // 时间戳版本
+  function sleep(time) {
+    let startTime = new Date().getTime()
+    while(new Date().getTime() - startTime < time) {}
+    console.log('sleep ' + time + 'ms')
+  }
+  // promise
+  function sleep2 (time) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('sleep ' + time + 'ms')
+        resolve()
+      }, time)
+    })
+  }
+
+  // 测试
+  const haha = async () => {
+    console.log(11)
+    sleep(2000)
+    await sleep2(3000)
+    console.log(222)
+  }
+
+  haha()
+  ```
+
+  </details>
+
 - 在堆中怎么插入一个元素？
 
 ### **2019/07/22 - 2019/07/28** :watch:
@@ -223,6 +304,10 @@
 
 - Vue 的 nextTick 原理？
 
+  参考文章：[《全面解析Vue.nextTick实现原理》](https://mp.weixin.qq.com/s/mCcW4OYj3p3471ghMBylBw)
+
+  参考文章： [《Vue源码阅读 - 批量异步更新与nextTick原理》](https://juejin.im/post/5b50760f5188251ad06b61be)
+
 - 跨标签页的通讯方式有哪些？
 
   参考文章：[《实现多个标签页之间通信的几种方法》](https://juejin.im/post/5acdba01f265da23826e5633)
@@ -294,6 +379,8 @@
 ---
 
 - 什么是临时性死区？
+
+  在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”
 
 - 如何使用 javascript 实现枚举？
 
