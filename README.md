@@ -10,6 +10,49 @@
 
 ### **2019/07/29 - 2019/08/04** :watch:
 
+- 说出下列代码的输出顺序？
+  <details>
+  <summary>点击</summary>
+
+  ```html
+  <div id="app">
+    <span id='name' ref='name'>{{ name }}</span>
+    <button @click='change'>change name</button>
+    <div id='content'></div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: 'SHERlocked93'
+        }
+      },
+      methods: {
+        change() {
+          const $name = this.$refs.name
+          this.$nextTick(() => console.log('setter前：' + $name.innerHTML))
+          this.name = ' name改喽 '
+          console.log('同步方式：' + this.$refs.name.innerHTML)
+          setTimeout(() => this.console("setTimeout方式：" + this.$refs.name.innerHTML))
+          this.$nextTick(() => console.log('setter后：' + $name.innerHTML))
+          this.$nextTick().then(() => console.log('Promise方式：' + $name.innerHTML))
+        }
+      }
+    })
+  </script>
+  ```
+  这里涉及的知识是 vue.$nextTick()原理，详情可查看[《全面解析Vue.nextTick实现原理》](https://mp.weixin.qq.com/s/mCcW4OYj3p3471ghMBylBw)
+  ```
+  同步方式：SHERlocked93 
+  setter前：SHERlocked93 
+  setter后：name改喽 
+  Promise方式：name改喽 
+  setTimeout方式：name改喽
+  ```
+  </details>
+
+
 - 实现一个LazyMan，可以按照以下方式调用
   > LazyMan(“Hank”) 输出: Hi! This is Hank!
   > 
@@ -21,7 +64,6 @@
   <summary>点击</summary>
   
   ```js
-
   class LazyMan {
     constructor(name) {
       this.name = name
