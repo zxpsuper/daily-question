@@ -10,6 +10,22 @@
 
 ### **2019/07/29 - 2019/08/04** :watch:
 
+- JavaScript严格模式下有哪些不同？
+
+  <details>
+  <summary>点击</summary>
+
+  - 不允许不使用 var 关键字去创建全局变量，抛出 ReferenceError
+  - 不允许对变量使用 delete 操作符，抛 ReferenceError
+  - 不可对对象的只读属性赋值，不可对对象的不可配置属性使用 delete 操作符，不可为不可拓展的对象添加属性，均抛 TypeError
+  - 对象属性名必须唯一
+  - 函数中不可有重名参数
+  - 在函数内部对修改参数不会反映到 arguments 中
+  - 淘汰 arguments.callee 和 arguments.caller
+  - 不可在 if 内部声明函数
+  - 抛弃 with 语句
+  </details>
+
 - 说出下列代码的输出顺序？
   <details>
   <summary>点击</summary>
