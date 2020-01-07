@@ -1,8 +1,6 @@
 ## 每日一文:books:
 
-在这里记录着每天自己遇到的一道印象深刻的前端问题，以及一道生活中随处可见的小问题或文章。
-
-链接：[（生活一题）](./life.md) [（每日一题）](./README.md)
+链接：[（生活一题）](../life/) [（每日一题）](../README.md)
 
 1. [React 开发必须知道的 34 个技巧](https://juejin.im/post/5dcb5a80e51d4520db19b906?utm_source=gold_browser_extension)
 
