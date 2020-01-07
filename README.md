@@ -1,4 +1,6 @@
-## 前端每日一题 :books:
+# 前端每日一题 :books:
+
+## 项目介绍
 
 - 在这里记录着每天自己遇到的一道印象深刻的前端问题，一道生活中随处可见的小问题。
 
@@ -10,8 +12,19 @@
 
 <img src="./image/wechat.png" style="width: 320px; margin: 0 auto; display: block">
 
+**备注：**
 
-### 其他模块
+> 在 github 项目的右上角，有三个按钮,分别是 watch、star、fork，新来的同学注意不要用错了，无休止的邮件提醒会给你造成不必要的信息干扰。
+>
+> 当你选择 Watching，表示你以后会关注这个项目的全部动态，以后只要这个项目发生变动，被别人提交了 pull request、被发起了 issue 等情况你都会收到邮件通知。
+>
+> star 相当于是点赞或收藏，方便以后查找。
+>
+> fork 表示你想要补充完善这个项目的内容。
+
+![](./image/fork_and_star.jpg)
+
+## 其他模块
 
 |模块|描述|
 |:---:|:---|
@@ -20,7 +33,7 @@
 |[前端算法](./algorithm//)|保存着一些前端算法题目及答案|
 
 
-### 最新问题
+## 最新问题
 
 - JavaScript 严格模式下有哪些不同？
 
@@ -182,13 +195,26 @@
 
 
 
-### 日志
+## 日志
 
 - **2019-03-27** —— 启动 daily-question（前端每日一题项目）
 
-- **2019-12-16** —— 添加 *前端算法* 模块
+- **2019-12-16** —— 添加 ***前端算法*** 模块
 
 - **2020-01-07** —— 优化项目结构，使其分类清晰，便于阅读
 
-<img src="https://raw.githubusercontent.com/zxpsuper/daily-question/master/image/fork_and_star.jpg" style="width: 320px; margin: 0 auto; display: block">
+## 关于作者
+
+作者： 小皮咖
+
+Email：zxpscau@163.com
+
+Github: https://github.com/zxpsuper
+
+知乎：https://www.zhihu.com/people/super-32-94-54/activities
+
+掘金：https://juejin.im/user/5af17df4518825672a02e1f5
+
+对内容有任何疑问，欢迎联系我。
+
 
