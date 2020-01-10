@@ -1,6 +1,6 @@
 ## 每日一文:books:
 
-链接：[（生活一题）](../life/) [（每日一题）](../README.md)
+链接：[（生活一题）](../life/) [（每日一题）](../front_end/README.md)
 
 1. [React 开发必须知道的 34 个技巧](https://juejin.im/post/5dcb5a80e51d4520db19b906?utm_source=gold_browser_extension)
 
