@@ -10,4 +10,6 @@
 
 4. [《一文掌握 Webpack 编译流程》](https://mp.weixin.qq.com/s/2h2dqGGEWTts7KQagGWEAg) 学习 webpack 的流程原理的文章推荐
 
-5. [《全面解析Vue.nextTick实现原理》](https://mp.weixin.qq.com/s/mCcW4OYj3p3471ghMBylBw) 根据浏览器事件队列实现该效果
+5. [《全面解析 Vue.nextTick 实现原理》](https://mp.weixin.qq.com/s/mCcW4OYj3p3471ghMBylBw) 根据浏览器事件队列实现该效果
+
+6. [12 道 vue 高频原理面试题,你能答出几道?](https://juejin.im/post/5e04411f6fb9a0166049a073?utm_source=gold_browser_extension#heading-24) 原理题讲的挺透彻
