@@ -17,6 +17,7 @@ function writeReadmeFile(path) {
   './front_end/浏览器',
   './front_end/css',
   './front_end/es6',
+  './front_end/2019',
   './front_end/javascript',
   './front_end/vue',
   './algorithm',
