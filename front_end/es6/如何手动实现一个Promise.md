@@ -1,6 +1,6 @@
 # 如何手动实现一个 Promise ?
 
-  promise 的三种状态 pending, resolve, reject
+Promise 的三种状态 pending, resolve, reject
 
 ```js
 function MyPromise(callback) {
@@ -71,5 +71,3 @@ MyPromise.prototype.then = function(onFulfilled, onRejected) {
   }
 };
 ```
-
-
