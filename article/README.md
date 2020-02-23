@@ -13,3 +13,7 @@
 5. [《全面解析 Vue.nextTick 实现原理》](https://mp.weixin.qq.com/s/mCcW4OYj3p3471ghMBylBw) 根据浏览器事件队列实现该效果
 
 6. [12 道 vue 高频原理面试题,你能答出几道?](https://juejin.im/post/5e04411f6fb9a0166049a073?utm_source=gold_browser_extension#heading-24) 原理题讲的挺透彻
+
+7. [前端下载文件的6种方法的对比](https://juejin.im/post/5e50fa23518825494b3cccd7?utm_source=gold_browser_extension)
+
+8. [【Vue原理】Diff - 白话版](https://mp.weixin.qq.com/s?__biz=MzUxNjQ1NjMwNw==&mid=2247484442&idx=1&sn=26143f93c79390947920a8dc7b84bd14&chksm=f9a66e06ced1e71009a1aacfa134348f3b1e6a2e95a982b09fa2ad5559791650d84aad5eaeb9&token=681836850&lang=zh_CN#rd)
