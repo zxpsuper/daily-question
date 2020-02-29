@@ -1,46 +1,87 @@
-// 建立堆
-function buildHeap(nums) {
-  // 注意这里的头节点是从0开始的，所以最后一个非叶子结点是 parseInt(nums.length/2)-1
-  let start = parseInt(nums.length / 2) - 1;
-  let size = nums.length;
-  // 从最后一个非叶子结点开始调整，直至堆顶。
-  for (let i = start; i >= 0; i--) {
-    adjustHeap(nums, i, size);
-  }
-  return nums;
+function TreeNode(val, char) {
+  this.val = val; // 数量
+  this.char = char;
+  this.code = '';
+  this.left = this.right = null;
 }
-// 调整最小堆，使index的值小于于左右节点
-function adjustHeap(nums, index, size) {
-  // 交换后可能会破坏堆结构，需要循环使得每一个父节点都大于左右结点
-  while (true) {
-    let min = index;
-    let left = index * 2 + 1; // 左节点
-    let right = index * 2 + 2; // 右节点
-    if (left < size && nums[min] > nums[left]) min = left;
-    if (right < size && nums[min] > nums[right]) min = right;
-    // 如果左右结点大于当前的结点则交换，并再循环一遍判断交换后的左右结点位置是否破坏了堆结构（比左右结点小了）
-    if (index !== min) {
-      [nums[index], nums[min]] = [nums[min], nums[index]];
-      index = min;
-    } else {
-      break;
-    }
-  }
-}
-// 获取最大的前K个数
-function getLargeNumber(nums, k) {
-  // 创建一个具有 K 的节点的最小堆（可以先取该数组的前 K 个元素）调整为最小堆。
-  let minHeap = buildHeap(nums.slice(0, k));
-  for (let i = k; i < nums.length; i++) {
-    // 将第 i 个元素与堆顶对比，如果大于堆顶元素，则说明堆顶元素不是第 K 大的值，因此将堆顶元素替换为第 i 个元素
-    if (minHeap[0] < nums[i]) {
-      minHeap[0] = nums[i];
-      // 替换后调整此最小堆
-      adjustHeap(minHeap, 0, k);
-    }
-  }
-  return minHeap;
-}
-var nums = [8, 9, 2, 15, 7, 1, 13, 35, 24];
 
-console.log(getLargeNumber(nums, 4));
+/**
+ * str 需要编码的字符串
+ */
+function HuffmanCompression(str) {
+  const charCountMap = {};
+  var heap = [];
+  var length = str.length;
+  for (var i = 0; i < length; i++) {
+    if (charCountMap[str[i]]) {
+      charCountMap[str[i]] = charCountMap[str[i]] + 1;
+    } else {
+      charCountMap[str[i]] = 1;
+    }
+  }
+
+  var charCountMapKeys = Object.keys(charCountMap);
+  var tempCharArray = [];
+  for (var i = 0; i < charCountMapKeys.length; i++) {
+    var currentKey = charCountMapKeys[i];
+    tempCharArray.push({ val: charCountMap[currentKey], char: currentKey });
+  }
+  tempCharArray.sort(function(a, b) {
+    return a.val - b.val;
+  });
+
+  for (var i = 0; i < tempCharArray.length; i++) {
+    heap.push(new TreeNode(tempCharArray[i].val, tempCharArray[i].char));
+  }
+
+  while (heap.length > 1) {
+    var first = heap.shift();
+    var second = heap.shift();
+    var sum = first.val + second.val;
+    var char = first.char + second.char;
+
+    var newTreeNode = new TreeNode(sum, char);
+    newTreeNode.left = first;
+    newTreeNode.right = second;
+
+    heap.push(newTreeNode);
+    heap.sort(function(a, b) {
+      return a.val - b.val;
+    });
+  }
+
+  calculateCode(heap[0]);
+  var codeMap = {};
+  generateCodeMap(heap[0], codeMap);
+
+  var result = '';
+  for (var i = 0; i < str.length; i++) {
+    result += codeMap[str[i]];
+  }
+  return result;
+}
+
+function calculateCode(node) {
+  if (node.left) {
+    node.left.code = node.code + '0';
+    calculateCode(node.left);
+  }
+  if (node.right) {
+    node.right.code = node.code + '1';
+    calculateCode(node.right);
+  }
+}
+
+function generateCodeMap(node, codeMap) {
+  if (!node.left && !node.right) {
+    codeMap[node.char] = node.code;
+  }
+  if (node.left) {
+    generateCodeMap(node.left, codeMap);
+  }
+  if (node.right) {
+    generateCodeMap(node.right, codeMap);
+  }
+}
+
+console.log(HuffmanCompression('everyday is awesome!'));
