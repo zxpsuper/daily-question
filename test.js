@@ -1,87 +1,57 @@
-function TreeNode(val, char) {
-  this.val = val; // 数量
-  this.char = char;
-  this.code = '';
-  this.left = this.right = null;
+function Node(val) {
+  this.left = null;
+  this.right = null;
+  this.value = val;
 }
 
-/**
- * str 需要编码的字符串
- */
-function HuffmanCompression(str) {
-  const charCountMap = {};
-  var heap = [];
-  var length = str.length;
-  for (var i = 0; i < length; i++) {
-    if (charCountMap[str[i]]) {
-      charCountMap[str[i]] = charCountMap[str[i]] + 1;
+function generateBST(root, array) {
+  var length = array.length;
+
+  for (var i = 1; i < length; i++) {
+    insertNode(root, array[i]);
+  }
+
+}
+
+function insertNode(node, value) {
+  if (value < node.value) {
+    if (node.left === null) {
+      node.left = new Node(value);
     } else {
-      charCountMap[str[i]] = 1;
+      node = node.left;
+      insertNode(node, value);
+    }
+  } else {
+    if (node.right === null) {
+      node.right = new Node(value);
+    } else {
+      node = node.right;
+      insertNode(node, value);
     }
   }
-
-  var charCountMapKeys = Object.keys(charCountMap);
-  var tempCharArray = [];
-  for (var i = 0; i < charCountMapKeys.length; i++) {
-    var currentKey = charCountMapKeys[i];
-    tempCharArray.push({ val: charCountMap[currentKey], char: currentKey });
-  }
-  tempCharArray.sort(function(a, b) {
-    return a.val - b.val;
-  });
-
-  for (var i = 0; i < tempCharArray.length; i++) {
-    heap.push(new TreeNode(tempCharArray[i].val, tempCharArray[i].char));
-  }
-
-  while (heap.length > 1) {
-    var first = heap.shift();
-    var second = heap.shift();
-    var sum = first.val + second.val;
-    var char = first.char + second.char;
-
-    var newTreeNode = new TreeNode(sum, char);
-    newTreeNode.left = first;
-    newTreeNode.right = second;
-
-    heap.push(newTreeNode);
-    heap.sort(function(a, b) {
-      return a.val - b.val;
-    });
-  }
-
-  calculateCode(heap[0]);
-  var codeMap = {};
-  generateCodeMap(heap[0], codeMap);
-
-  var result = '';
-  for (var i = 0; i < str.length; i++) {
-    result += codeMap[str[i]];
-  }
-  return result;
 }
 
-function calculateCode(node) {
-  if (node.left) {
-    node.left.code = node.code + '0';
-    calculateCode(node.left);
-  }
-  if (node.right) {
-    node.right.code = node.code + '1';
-    calculateCode(node.right);
-  }
+var array = [2, 3, 4, 12, 3, 54, 6, 7, 1];
+var root = new Node(array[0]);
+
+generateBST(root, array);
+
+// 中序遍历
+function inorderSearch(root) {
+  var array = [];
+
+  _inorderSearch(root, array);
+  return array;
+
 }
 
-function generateCodeMap(node, codeMap) {
-  if (!node.left && !node.right) {
-    codeMap[node.char] = node.code;
+function _inorderSearch(node, array) {
+  if (!node) {
+    return;
   }
-  if (node.left) {
-    generateCodeMap(node.left, codeMap);
-  }
-  if (node.right) {
-    generateCodeMap(node.right, codeMap);
-  }
+  _inorderSearch(node.left, array);
+  array.push(node.value);
+  _inorderSearch(node.right, array);
 }
-
-console.log(HuffmanCompression('everyday is awesome!'));
+console.log(root);
+console.log(inorderSearch(root));
