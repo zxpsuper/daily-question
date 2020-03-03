@@ -17,3 +17,5 @@
 7. [前端下载文件的6种方法的对比](https://juejin.im/post/5e50fa23518825494b3cccd7?utm_source=gold_browser_extension)
 
 8. [【Vue原理】Diff - 白话版](https://mp.weixin.qq.com/s?__biz=MzUxNjQ1NjMwNw==&mid=2247484442&idx=1&sn=26143f93c79390947920a8dc7b84bd14&chksm=f9a66e06ced1e71009a1aacfa134348f3b1e6a2e95a982b09fa2ad5559791650d84aad5eaeb9&token=681836850&lang=zh_CN#rd)
+
+9. [一种自动化生成骨架屏的方案](https://github.com/Jocs/jocs.github.io/issues/22)
