@@ -17,6 +17,26 @@
 
 ---
 
+
+- 如何监听断网，重连的事件？
+
+  <details>
+  <summary>点击</summary>
+
+  ```js
+  window.addEventListener('offline', function() {
+    onLine = false;
+  });
+  window.addEventListener('online', function() {
+    if (onLine == false) {
+      onLine = true;
+      reLine();
+    }
+  });
+  ```
+
+  </details>
+
 - git 缓存 git stash 的用法？
 
   <details>
@@ -40,10 +60,3 @@
 
   </details>
 
-* 如何将 IP 转化为二进制？如何将二进制转化为 ip?
-
-* 怎么将 cookie 中 httponly 属性设置为 true
-
-  `response.addHeader("Set-Cookie", "uid=112; Path=/; HttpOnly");`
-
-* 移动端的 ios 安卓兼容问题
