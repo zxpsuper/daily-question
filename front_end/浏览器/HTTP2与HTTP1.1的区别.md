@@ -10,8 +10,8 @@ HTTP/2 标准于 2015 年 5 月以 RFC 7540 正式发表。
 > HTTP/2 enables a more efficient use of network resources and a reduced perception of latency by introducing header field compression and allowing multiple concurrent exchanges on the same connection… Specifically, it allows interleaving of request and response messages on the same connection and uses an efficient coding for HTTP header fields. It also allows prioritization of requests, letting more important requests complete more quickly, further improving performance.
 > The resulting protocol is more friendly to the network, because fewer TCP connections can be used in comparison to HTTP/1.x. This means less competition with other flows, and longer-lived connections, which in turn leads to better utilization of available network capacity. Finally, HTTP/2 also enables more efficient processing of messages through use of binary message framing.
 
-简单来说,HTTP/2 更强大,高效。它通过 压缩头部域和响应多路复用 来更有效的利用网络资源和降低延迟。它还添加了请求优先级,让更重要的请求更快地完成,从而进一步提高性能。
-还增加了服务器推送,支持这些特性需要大量的协议增加头部字段来支持,例如新的流量控制,差错处理,升级机制.HTTP/2 并没有在应用中改变 HTTP 的语义,它通过在新的二进制帧层控制整个过程以及隐藏复杂性,而这不需要改变原来有的东西就可以实现.
+简单来说,HTTP/2 更强大,高效。它通过 **压缩头部域和响应多路复用** 来更有效的利用网络资源和降低延迟。它还添加了**请求优先级**,让更重要的请求更快地完成,从而进一步提高性能。
+还增加了**服务器推送**,支持这些特性需要大量的协议增加头部字段来支持,例如新的流量控制,差错处理,升级机制.HTTP/2 并没有在应用中改变 HTTP 的语义,它通过在新的二进制帧层控制整个过程以及隐藏复杂性,而这不需要改变原来有的东西就可以实现.
 
 下面我们来介绍下这几个新特性。
 
@@ -19,7 +19,7 @@ HTTP/2 标准于 2015 年 5 月以 RFC 7540 正式发表。
 
 性能提升的核心在于二进制帧层.它指 HTTP 消息在客户端和服务端如何封装和传输。
 
-![](../../image/http2.webp)
+![](/image/http2.webp)
 
 它在 socket 接口之间采用一种更好的编码机制,与 HTTP1.x 的采用的换行符分隔文本不同，HTTP/2 消息被分成很小的消息和 frame,然后每个消息和 frame 用二进制编码。客户端和服务端都采用二进制编码和解码。HTTP/1.x 的客户端不能与只有 HTTP/2 的服务端通信。幸运的是，我们的应用还没意识到这些改变。客户端和服务端能够很好的处理这些帧。
 
