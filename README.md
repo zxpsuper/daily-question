@@ -10,7 +10,12 @@
 
 - 欢迎大家到 Issues 交流，鼓励 PR，感谢 Star、感谢 watch，大家有啥好的建议可以加我微信一起交流讨论！
 
-<img src="./image/wechat.png" style="width: 320px; margin: 0 auto; display: block">
+  <details>
+  <summary>微信</summary>
+
+  ![](./image/wechat.png)
+
+  </details>
 
 **备注：**
 
