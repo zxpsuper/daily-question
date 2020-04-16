@@ -17,8 +17,6 @@
 
   </details>
 
-**备注：**
-
 > 在 github 项目的右上角，有三个按钮,分别是 watch、star、fork，新来的同学注意不要用错了，无休止的邮件提醒会给你造成不必要的信息干扰。
 >
 > 当你选择 Watching，表示你以后会关注这个项目的全部动态，以后只要这个项目发生变动，被别人提交了 pull request、被发起了 issue 等情况你都会收到邮件通知。
@@ -46,10 +44,10 @@
   <summary>点击</summary>
 
   ```js
-  window.addEventListener('offline', function() {
+  window.addEventListener('offline', function () {
     onLine = false;
   });
-  window.addEventListener('online', function() {
+  window.addEventListener('online', function () {
     if (onLine == false) {
       onLine = true;
       reLine();
@@ -91,6 +89,8 @@
 - **2020-01-07** —— 优化项目结构，使其分类清晰，便于阅读
 
 - **2020-01-10** —— 利用 nodejs 为每个分类文件夹自动生成 readme 文件
+
+- **2020-04-16** —— 利用 nodejs 和 vuepress 自动生成在线阅读网站
 
 ## 关于作者 :boy:
 
