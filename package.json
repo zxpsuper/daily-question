@@ -1,9 +1,14 @@
 {
   "devDependencies": {
-    "inquirer": "^6.5.0",
-    "shelljs": "^0.8.3"
+    "gh-pages": "^2.2.0",
+    "inquirer": "^6.5.2",
+    "shelljs": "^0.8.3",
+    "vuepress": "^1.4.1"
   },
   "scripts": {
-    "commit": "node ./git-commit.js"
+    "commit": "node ./git-commit.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "publish": "node build-docs.js && npm run docs:build && node publish.js"
   }
 }
