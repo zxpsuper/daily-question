@@ -5,6 +5,7 @@ ghpages.publish(
     branch: 'gh-pages',
   },
   function(err) {
-    console.log('docs同步完成!');
+    if (err) console.log(err)
+    else console.log('docs同步完成!');
   }
 );
