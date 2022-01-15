@@ -2,7 +2,7 @@
   "devDependencies": {
     "gh-pages": "^2.2.0",
     "inquirer": "^6.5.2",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "vuepress": "^1.4.1"
   },
   "scripts": {
